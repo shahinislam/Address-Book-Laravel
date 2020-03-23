@@ -6,14 +6,14 @@
     <form action="/contacts" method="post">
 
         <div class="form-group">
-            <label for="firstname">lastname</label>
+            <label for="firstname">Firstname</label>
             <input type="text" name="firstname" value="{{ old('firstname') ?? $contact->firstname }}" class="form-control" autocomplete="off">
             @error('firstname')
             <p style="color: red;">{{ $message }}</p>
             @enderror
         </div>
         <div class="form-group">
-            <label for="lastname">lastname</label>
+            <label for="lastname">Lastname</label>
             <input type="text" name="lastname" value="{{ old('lastname') ?? $contact->lastname }}" class="form-control" autocomplete="off">
             @error('lastname')
             <p style="color: red;">{{ $message }}</p>
