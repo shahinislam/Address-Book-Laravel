@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
+Route::get('/', 'ContactController@index');
+Route::get('/contacts/create', 'ContactController@create');
+Route::post('/contacts', 'ContactController@store');
+Route::get('/contacts/{contact}', 'ContactController@show');
+Route::get('/contacts/{contact}/edit', 'ContactController@edit');
+Route::patch('/contacts/{contact}', 'ContactController@update');
+Route::delete('/contacts/{contact}', 'ContactController@destroy');
