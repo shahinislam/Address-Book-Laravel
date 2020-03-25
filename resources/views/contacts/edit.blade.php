@@ -1,7 +1,7 @@
 @extends('./layout')
 
 @section('content')
-    <h1>Add New contact</h1>
+    <h1>Update contact</h1>
 
     <form action="/contacts/{{ $contact->id }}" method="post">
         
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label for="birth">Date of Birth</label>
-            <input class="form-control" type="text" name="birth" value="{{ old('birth') ?? $contact->birth }}" autocomplete="off">
+            <input class="form-control" type="date" name="birth" value="{{ old('birth') ?? $contact->birth }}" autocomplete="off">
             @error('birth')
             <p style="color: red;">{{ $message }}</p>
             @enderror

@@ -32,7 +32,8 @@ class ContactController extends Controller
 
         $contact = Contact::create($data);
 
-        return redirect('/contacts/' . $contact->id);
+        return redirect('/contacts/' . $contact->id)
+            ->with('success', 'Contact has been Inserted');
     }
 
     public function show(Contact $contact)
@@ -52,19 +53,23 @@ class ContactController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email',
-            'birth' => 'required',
+            'birth' => 'required|date',
         ]);
 
         $contact->update($data);
 
-        return redirect('/');
+        return redirect('/contacts/' . $contact->id)
+            ->with('success', 'Contact has been Updated');
     }
 
     public function destroy(Contact $contact)
     {
+        $name = $contact->firstname .' '. $contact->lastname;
+        $contact->address()->delete();
         $contact->delete();
 
-        return redirect('/');
+        return redirect('/')
+            ->with('danger', $name . ' Contact has been Deleted');
     }
 
 }
