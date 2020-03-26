@@ -16,8 +16,10 @@
             </div>
         @endif
 
-        <a class="btn btn-info d-flex justify-content-center mb-2"
-           href="/contacts/{{ $contact->id }}/address/create">Add New address</a>
+       <div class="d-flex justify-content-center mb-4">
+           <a class="btn btn-outline-info font-weight-bolder font-italic"
+              href="/contacts/{{ $contact->id }}/address/create">Add New address</a>
+       </div>
 
         <table class="table table-bordered">
             <thead>
