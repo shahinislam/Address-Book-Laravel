@@ -2,7 +2,7 @@
     <div class="form-group col">
         <label for="firstname">First Name</label>
         <input type="text" name="firstname" value="{{ old('firstname') ?? $contact->firstname }}"
-               class="form-control shadow-none {{ $errors->first('firstname') ? ' border-danger' : '' }}" autocomplete="off">
+               class="form-control shadow-none {{ $errors->first('firstname') ? ' border-danger' : '' }}" autocomplete="off" autofocus>
         @error('firstname')
             <div class="text-danger text-capitalize">{{ $message }}</div>
         @enderror

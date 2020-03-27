@@ -33,7 +33,10 @@
             <tbody>
             @forelse($contacts as $contact)
                 <tr>
-                    <td>{{ $contact->firstname }} {{ $contact->lastname }}</td>
+                    <td>
+                        <a href="/contacts/{{ $contact->id }}/details" class="">
+                            {{ $contact->firstname }} {{ $contact->lastname }}</a>
+                    </td>
                     <td>{{ $contact->email }}</td>
                     <td>{{ $contact->birth }}</td>
                     <td class="d-flex justify-content-around">
@@ -41,7 +44,7 @@
                         <form action="/contacts/{{ $contact->id }}" method="post">
                             @method('DELETE')
                             @csrf
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <button onclick="return confirm('Sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                     <td><a class="" href="/contacts/{{ $contact->id }}/address">Address List</a></td>
@@ -53,5 +56,8 @@
 
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+            {{ $contacts->links() }}
+        </div>
     </div>
 @endsection

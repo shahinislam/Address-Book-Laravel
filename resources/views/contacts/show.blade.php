@@ -7,6 +7,7 @@
             <h1 class="mb-4">{{ $contact->firstname }} {{ $contact->lastname }}</h1>
 
             <div class="d-flex justify-content-start mb-4">
+                <a class="btn btn-info mr-2" href="/contacts/create">Add New</a>
                 <a class="btn btn-warning px-4 mr-2"
                    href="/contacts/{{ $contact->id }}/edit">Edit</a>
                 <form action="/contacts/{{ $contact->id }}" method="post">

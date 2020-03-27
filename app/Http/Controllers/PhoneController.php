@@ -56,7 +56,7 @@ class PhoneController extends Controller
         $phone->update($data);
 
         return redirect('/contacts/'. $contact->id .'/phones/' . $phone->id)
-            ->with('success', 'Phone has been Updated');
+            ->with('success', 'Phone Number has been Updated');
     }
 
     public function destroy(Contact $contact, Phone $phone)
@@ -64,7 +64,7 @@ class PhoneController extends Controller
         $phone->delete();
 
         return redirect('/contacts/' . $contact->id . '/phones')
-            ->with('danger', 'Phone has been Deleted');
+            ->with('danger', 'Phone Number has been Deleted');
     }
 
 }

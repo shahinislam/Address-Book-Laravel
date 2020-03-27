@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/contacts/{contact}/details', 'DetailController@index');
 
 Route::get('/', 'ContactController@index');
 Route::get('/contacts/create', 'ContactController@create');

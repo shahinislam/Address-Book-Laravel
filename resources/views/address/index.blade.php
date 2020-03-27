@@ -17,8 +17,8 @@
         @endif
 
        <div class="d-flex justify-content-center mb-4">
-           <a class="btn btn-outline-info font-weight-bolder font-italic"
-              href="/contacts/{{ $contact->id }}/address/create">Add New address</a>
+           <a class="btn btn-outline-info font-weight-bolder"
+              href="/contacts/{{ $contact->id }}/address/create">Add New Address</a>
        </div>
 
         <table class="table table-bordered">
@@ -51,7 +51,7 @@
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="4">No address to show.</td></tr>
+                <tr><td colspan="6">No address to show.</td></tr>
             @endforelse
             </tbody>
         </table>

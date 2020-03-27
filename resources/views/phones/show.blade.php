@@ -5,6 +5,9 @@
         <div class="col-md-8">
             <h1 class="pb-4">{{ $contact->firstname }} {{ $contact->lastname }}'s {{ $phone->name }} phone</h1>
             <div class="d-flex justify-content-start mb-4">
+                <a class="btn btn-info mr-2"
+                   href="/contacts/{{ $contact->id }}/phones/create">Add New</a>
+
                 <a class="btn btn-warning px-4 mr-2"
                    href="/contacts/{{ $contact->id }}/phones/{{ $phone->id }}/edit">Edit</a>
 
