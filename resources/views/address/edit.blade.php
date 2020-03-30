@@ -3,20 +3,31 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Address: {{ $contact->firstname }} {{ $contact->lastname }}</h1>
+            <div class="card pb-5">
+                <div class="card-header text-center text-uppercase text-light text-info"
+                     style="font-family: 'Times New Roman'; background: -webkit-linear-gradient(left, black, darkred);">
+                    <h1>Edit Address</h1>
+                </div>
 
-            <form action="/contacts/{{ $contact->id }}/address/{{ $address->id }}" method="post">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <h3 class="text-uppercase text-success m-2" style="font-family: cursive;" >
+                            {{ $contact->firstname }} {{ $contact->lastname }}</h3>
 
-                @method('PATCH')
+                        <form action="/contacts/{{ $contact->id }}/address/{{ $address->id }}" method="post">
 
-                @include('address.form')
+                            @method('PATCH')
 
+                            @include('address.form')
 
-                @csrf
+                            @csrf
 
-                <button class="btn btn-primary">Update Address</button>
+                            <button class="btn btn-success">Update Address</button>
 
-            </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

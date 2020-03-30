@@ -20,7 +20,9 @@ class AddressController extends Controller
     {
         $address = new Address();
 
-        return view('address.create', compact('address', 'contact'));
+        $countries = Country::all();
+
+        return view('address.create', compact('address', 'contact','countries'));
     }
 
     public function store(Contact $contact)
@@ -42,12 +44,14 @@ class AddressController extends Controller
 
     public function show(Contact $contact, Address $address)
     {
+
         return view('address.show', compact('address', 'contact'));
     }
 
     public function edit(Contact $contact, Address $address)
     {
-        return view('address.edit', compact('contact','address'));
+        $countries = Country::all();
+        return view('address.edit', compact('contact','address', 'countries'));
     }
 
     public function update(Contact $contact, Address $address)

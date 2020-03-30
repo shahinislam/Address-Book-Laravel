@@ -1,10 +1,10 @@
 @extends('./layout')
 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-
-            <h1>{{ $contact->firstname }} {{ $contact->lastname }}'s Phone Numbers:</h1>
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center text-uppercase text-info" style="font-family: 'Times New Roman', Times, serif">Phone Number</h1>
+            </div>
 
             @if (session('success'))
                 <div class="alert alert-success">
@@ -18,12 +18,13 @@
                 </div>
             @endif
 
-            <div class="d-flex justify-content-center mb-4">
-                <a class="btn btn-outline-info font-weight-bolder"
+            <div class="d-flex justify-content-between m-4">
+                <h3 class="text-uppercase text-success" style="font-family: cursive;">{{ $contact->firstname }} {{ $contact->lastname }}</h3>
+                <a class="btn btn-success font-weight-bolder"
                    href="/contacts/{{ $contact->id }}/phones/create">Add New Phone</a>
             </div>
 
-            <table class="table table-bordered">
+            <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>Phone Type</th>
@@ -36,13 +37,15 @@
                     <tr>
                         <td>{{ $phone->name }}</td>
                         <td>{{ $phone->number }}</td>
-                        <td class="d-flex justify-content-around">
-                            <a class="btn btn-warning btn-sm px-3" href="/contacts/{{ $contact->id }}/phones/{{ $phone->id }}/edit">Edit</a>
-                            <form action="/contacts/{{ $contact->id }}/phones/{{ $phone->id }}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                        <td>
+                            <div class="d-flex justify-content-start">
+                                <a class="btn btn-warning btn-sm px-3 mr-1" href="/contacts/{{ $contact->id }}/phones/{{ $phone->id }}/edit">Edit</a>
+                                <form action="/contacts/{{ $contact->id }}/phones/{{ $phone->id }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
@@ -50,9 +53,8 @@
                 @endforelse
                 </tbody>
             </table>
-            <a class="btn btn-info mb-2" href="/">
-                Back to Contact Lists</a>
-
+            <div class="card-footer">
+                <a class="btn btn-dark" href="/">Back to Contact Lists</a>
+            </div>
         </div>
-    </div>
 @endsection

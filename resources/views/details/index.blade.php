@@ -1,11 +1,13 @@
 @extends('./layout')
 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <h1>Contact Details</h1>
+    <div class="card row justify-content-center mb-5">
+        <div class="">
+            <div class="card-header mb-4 text-center text-uppercase text-info" style="font-family: 'Times New Roman', Times, serif"">
+                <h1>Contact Details</h1>
+            </div>
 
-            <table class="table table-striped table-success table-hover">
+            <table class="table table-striped table-hover table-light">
                 <tbody>
                 <tr>
                     <th>Name</th>
@@ -22,8 +24,8 @@
                 </tbody>
             </table>
 
-            <h1 class="mt-3">Address</h1>
-            <table class="table table-hover">
+            <h3 class="mt-3 text-center text-uppercase text-info">Address</h3>
+            <table class="table table-striped table-hover table-secondary">
                 <thead>
                 <tr>
                     <th>Address Type</th>
@@ -50,8 +52,8 @@
                 </tbody>
             </table>
 
-            <h1 class="mt-3">Phone Number</h1>
-            <table class="table table-bordered table-hover">
+            <h3 class="mt-3 text-center text-uppercase text-info">Phone Number</h3>
+            <table class="table table-striped table-hover table-info">
                 <thead>
                 <tr>
                     <th>Phone Type</th>
@@ -69,7 +71,9 @@
                 @endforelse
                 </tbody>
             </table>
-            <a href="/" class="btn btn-primary">Return Homepage</a>
+            <div class="card-footer">
+                <a href="/" class="btn btn-secondary">Return Homepage</a>
+            </div>
 
         </div>
     </div>

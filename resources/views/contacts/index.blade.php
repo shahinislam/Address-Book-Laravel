@@ -1,8 +1,10 @@
 @extends('./layout')
 
 @section('content')
-    <div class="">
-        <h1>Contact lists</h1>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center text-uppercase text-info" style="font-family: 'Times New Roman', Times, serif">Contact lists</h1>
+        </div>
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -15,11 +17,12 @@
             </div>
         @endif
 
-        <div class="d-flex justify-content-center mb-4">
-            <a class="btn btn-outline-info font-weight-bolder" href="/contacts/create">Add New Contact</a>
+        <div class="m-2 d-flex justify-content-between">
+            <input id="search" name="search" class="w-75 form-control shadow-none" type="text" placeholder="Search Contact...">
+            <a class="btn btn-success font-weight-bold" href="/contacts/create">Add New Contact</a>
         </div>
 
-        <table class="table table-bordered">
+        <table class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>Name</th>
@@ -31,33 +34,79 @@
             </tr>
             </thead>
             <tbody>
-            @forelse($contacts as $contact)
-                <tr>
-                    <td>
-                        <a href="/contacts/{{ $contact->id }}/details" class="">
-                            {{ $contact->firstname }} {{ $contact->lastname }}</a>
-                    </td>
-                    <td>{{ $contact->email }}</td>
-                    <td>{{ $contact->birth }}</td>
-                    <td class="d-flex justify-content-around">
-                        <a class="btn btn-warning btn-sm px-3" href="/contacts/{{ $contact->id }}/edit">Edit</a>
-                        <form action="/contacts/{{ $contact->id }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button onclick="return confirm('Sure you want to delete?')" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                    <td><a class="" href="/contacts/{{ $contact->id }}/address">Address List</a></td>
-                    <td><a href="/contacts/{{ $contact->id }}/phones">Phone List</a></td>
-                </tr>
-            @empty
-                <tr><td colspan="4">No contacts to show.</td></tr>
-            @endforelse
-
+                @forelse($contacts as $contact)
+                    <tr>
+                        <td>
+                            <a href="/contacts/{{ $contact->id }}/details"
+                               class="text-decoration-none text-success text-uppercase">
+                                {{ $contact->firstname }} {{ $contact->lastname }}</a>
+                        </td>
+                        <td>{{ $contact->email }}</td>
+                        <td>{{ $contact->birth }}</td>
+                        <td>
+                            <div class="d-flex justify-content-start">
+                                <a class="btn btn-warning btn-sm px-3 mr-1" href="/contacts/{{ $contact->id }}/edit">Edit</a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                <div class="modal fade" id="deleteModal">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-center">Delete Confirmation</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center">Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-info px-4" data-dismiss="modal">No</button>
+                                                <form action="/contacts/{{ $contact->id }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger px-4">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><a href="/contacts/{{ $contact->id }}/address">Address List</a></td>
+                        <td><a href="/contacts/{{ $contact->id }}/phones">Phone List</a></td>
+                    </tr>
+                @empty
+                    <tr><td colspan="7">No contacts to show.</td></tr>
+                @endforelse
             </tbody>
         </table>
         <div class="d-flex justify-content-center">
             {{ $contacts->links() }}
         </div>
+
+
+
     </div>
+    <script>
+        $(document).ready(function () {
+
+            function fetch_customer_data(query = '') {
+                $.ajax({
+                    url: "{{ route('live_search.action') }}",
+                    method: 'GET',
+                    data: {
+                        query : query
+                    },
+                    dataType: 'json',
+                    success: function (contacts) {
+                        $('tbody').html(contacts);
+                    }
+                });
+            }
+            $(document).on('keyup', '#search', function () {
+                var $query = $(this).val();
+
+                fetch_customer_data($query);
+            });
+        });
+    </script>
 @endsection
+

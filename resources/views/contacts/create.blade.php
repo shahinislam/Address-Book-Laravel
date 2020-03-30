@@ -3,17 +3,24 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="mb-4">Add New contact</h1>
+            <div class="card pb-5">
+                <div class="card-header text-center text-uppercase text-light text-info"
+                     style="font-family: 'Times New Roman'; background: -webkit-linear-gradient(left, greenyellow, deepskyblue);">
+                    <h1>Add New Contact</h1>
+                </div>
 
-            <form action="/contacts" method="post">
+                <div class="card-body">
+                    <form action="/contacts" method="post">
 
-                @include('contacts.form')
+                        @include('contacts.form')
 
-                @csrf
+                        @csrf
 
-                <button class="btn btn-primary mt-3">Add New contact</button>
+                        <button class="btn btn-info">Add New contact</button>
 
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

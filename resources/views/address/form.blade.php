@@ -40,7 +40,7 @@
 </div>
 
 <div class="form-group">
-    <label for="zip">Zip/Po</label>
+    <label for="zip">Zip/Post</label>
     <input type="text" name="zip" value="{{ old('zip') ?? $address->zip }}"
            class="form-control shadow-none {{ $errors->first('zip') ? ' border-danger' : '' }}" autocomplete="off">
     @error('zip')
@@ -52,10 +52,6 @@
     <label for="country">Country</label>
     <select name="country" class="form-control shadow-none {{ $errors->first('country') ? ' border-danger' : '' }}">
         <option value="" class="text-muted">Select Country</option>
-
-        <?php
-             $countries = \App\Country::all();
-        ?>
 
         @foreach($countries as $country)
             <option value="{{ $country->name }}" {{ (old('country') == $country->name || $address->country == $country->name) ? 'selected' : ''}}>{{ $country->name }}</option>
