@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $contacts = Contact::orderBy('firstname', 'asc')->paginate(5);
+        $contacts = auth()->user()->contacts()
+                                  ->orderBy('firstname', 'asc')
+                                  ->paginate(5);
 
         return view('contacts.index', compact('contacts'));
     }
@@ -60,7 +67,7 @@ class ContactController extends Controller
             'birth' => 'required',
         ]);
 
-        $contact = Contact::create($data);
+        $contact = auth()->user()->contacts()->create($data);
 
         return redirect('/contacts/' . $contact->id)
             ->with('success', 'Contact has been Inserted');
@@ -86,7 +93,7 @@ class ContactController extends Controller
             'birth' => 'required|date',
         ]);
 
-        $contact->update($data);
+        auth()->user()->contacts()->update($data);
 
         return redirect('/contacts/' . $contact->id)
             ->with('success', 'Contact has been Updated');

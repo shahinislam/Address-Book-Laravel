@@ -1,4 +1,6 @@
-@extends('./layout')
+@extends('layouts.app')
+
+@section('title', 'Contact Details')
 
 @section('content')
     <div class="card row justify-content-center mb-5">
@@ -72,7 +74,7 @@
                 </tbody>
             </table>
             <div class="card-footer">
-                <a href="/" class="btn btn-secondary">Return Homepage</a>
+                <a href="/contacts" class="btn btn-success" style="background: -webkit-linear-gradient(left, darkslategrey, darkturquoise);">Return Homepage</a>
             </div>
 
         </div>

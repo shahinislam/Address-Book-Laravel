@@ -1,9 +1,11 @@
-@extends('./layout')
+@extends('layouts.app')
+
+@section('title', 'Address Book | Contact Page')
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1 class="text-center text-uppercase text-info" style="font-family: 'Times New Roman', Times, serif">Contact lists</h1>
+            <h1 class="text-center text-uppercase" style="color: darkturquoise; font-family: 'Times New Roman', Times, serif">Contact lists</h1>
         </div>
         @if (session('success'))
             <div class="alert alert-success">
@@ -17,8 +19,7 @@
             </div>
         @endif
 
-        <div class="m-2 d-flex justify-content-between">
-            <input id="search" name="search" class="w-75 form-control shadow-none" type="text" placeholder="Search Contact...">
+        <div class="m-3">
             <a class="btn btn-success font-weight-bold" href="/contacts/create">Add New Contact</a>
         </div>
 
@@ -38,7 +39,7 @@
                     <tr>
                         <td>
                             <a href="/contacts/{{ $contact->id }}/details"
-                               class="text-decoration-none text-success text-uppercase">
+                               class="text-decoration-none text-uppercase" style="color: darkslategrey;">
                                 {{ $contact->firstname }} {{ $contact->lastname }}</a>
                         </td>
                         <td>{{ $contact->email }}</td>
@@ -101,6 +102,7 @@
                     }
                 });
             }
+
             $(document).on('keyup', '#search', function () {
                 var $query = $(this).val();
 

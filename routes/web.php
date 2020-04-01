@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/contacts/{contact}/details', 'DetailController@index');
 
-Route::get('/', 'ContactController@index');
+Route::get('/contacts', 'ContactController@index');
 Route::get('/search', 'ContactController@search')->name('live_search.action');
 Route::get('/contacts/create', 'ContactController@create');
 Route::post('/contacts', 'ContactController@store');
@@ -41,3 +41,11 @@ Route::get('/contacts/{contact}/phones/{phone}', 'PhoneController@show');
 Route::get('/contacts/{contact}/phones/{phone}/edit', 'PhoneController@edit');
 Route::patch('/contacts/{contact}/phones/{phone}', 'PhoneController@update');
 Route::delete('/contacts/{contact}/phones/{phone}', 'PhoneController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+   return view('welcome');
+});

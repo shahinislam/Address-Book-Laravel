@@ -1,4 +1,6 @@
-@extends('./layout')
+@extends('layouts.app')
+
+@section('title', 'Contact Show')
 
 @section('content')
     <div class="row justify-content-center">
@@ -41,7 +43,7 @@
                         </tr>
                     </table>
 
-                    <a class="btn btn-info mt-3" href="/">Back to Home</a>
+                    <a class="btn btn-info mt-3" href="/contacts">Back to Contacts</a>
 
                 </div>
                 </div>

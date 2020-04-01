@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PhoneController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Contact $contact)
     {
         $phones = $contact->phones()->get();

@@ -1,4 +1,6 @@
-@extends('./layout')
+@extends('layouts.app')
+
+@section('title', 'Addess Book | Phones')
 
 @section('content')
         <div class="card">
@@ -54,7 +56,7 @@
                 </tbody>
             </table>
             <div class="card-footer">
-                <a class="btn btn-dark" href="/">Back to Contact Lists</a>
+                <a class="btn btn-dark" href="/contacts">Back to Contact Lists</a>
             </div>
         </div>
 @endsection

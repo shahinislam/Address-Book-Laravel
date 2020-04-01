@@ -13,8 +13,14 @@ class Contact extends Model
     {
         return $this->hasMany(Address::class);
     }
+
     public function phones()
     {
         return $this->hasMany(Phone::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

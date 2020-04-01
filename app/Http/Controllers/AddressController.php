@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Contact $contact)
     {
         $address = $contact->address()->get();

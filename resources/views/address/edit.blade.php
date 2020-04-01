@@ -1,4 +1,6 @@
-@extends('./layout')
+@extends('layouts.app')
+
+@section('title', 'Address Edit')
 
 @section('content')
     <div class="row justify-content-center">
