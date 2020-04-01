@@ -22,35 +22,6 @@ class ContactController extends Controller
         return view('contacts.index', compact('contacts'));
     }
 
-    public function search(Request $request)
-    {
-
-        if($request->ajax()) {
-
-            $query = $request->get('query');
-
-            if ($query != '') {
-
-                $contact = DB::table('contacts')
-                    ->where('firstname', 'like', '%' .$query. '%')
-                    ->where('lastname', 'like', '%' .$query. '%')
-                    ->orWhere('email', 'like', '%' .$query. '%')
-                    ->orWhere('birth', 'like', '%' .$query. '%')
-                    ->orderBy('id', 'desc')
-                    ->get();
-
-            }else{
-                $contacts = DB::table('contacts')
-                    ->orderBy('id', 'desc')
-                    ->get();
-            }
-
-            $return_array = compact('contacts');
-
-            return response()->json($return_array);
-        }
-    }
-
     public function create()
     {
         $contact = new Contact();

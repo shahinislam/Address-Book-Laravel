@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/contacts/{contact}/details', 'DetailController@index');
 
 Route::get('/contacts', 'ContactController@index');
-Route::get('/search', 'ContactController@search')->name('live_search.action');
 Route::get('/contacts/create', 'ContactController@create');
 Route::post('/contacts', 'ContactController@store');
 Route::get('/contacts/{contact}', 'ContactController@show');

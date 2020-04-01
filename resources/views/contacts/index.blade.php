@@ -82,33 +82,7 @@
         <div class="d-flex justify-content-center">
             {{ $contacts->links() }}
         </div>
-
-
-
     </div>
-    <script>
-        $(document).ready(function () {
 
-            function fetch_customer_data(query = '') {
-                $.ajax({
-                    url: "{{ route('live_search.action') }}",
-                    method: 'GET',
-                    data: {
-                        query : query
-                    },
-                    dataType: 'json',
-                    success: function (contacts) {
-                        $('tbody').html(contacts);
-                    }
-                });
-            }
-
-            $(document).on('keyup', '#search', function () {
-                var $query = $(this).val();
-
-                fetch_customer_data($query);
-            });
-        });
-    </script>
 @endsection
 
