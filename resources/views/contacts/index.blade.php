@@ -39,7 +39,7 @@
                     <tr>
                         <td>
                             <a href="/contacts/{{ $contact->id }}/details"
-                               class="text-decoration-none text-uppercase" style="color: darkslategrey;">
+                               class="text-uppercase" style="color: darkslategrey;">
                                 {{ $contact->firstname }} {{ $contact->lastname }}</a>
                         </td>
                         <td>{{ $contact->email }}</td>
