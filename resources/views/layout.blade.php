@@ -8,9 +8,8 @@
 
     <title>Address Book</title>
 
-    <script src="{{ asset('/js/jquery-3.4.1.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+
 </head>
 <body>
 <div class="container">

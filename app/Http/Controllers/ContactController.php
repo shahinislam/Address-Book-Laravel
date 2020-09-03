@@ -56,7 +56,6 @@ class ContactController extends Controller
 
     public function update(Contact $contact)
     {
-
         $data = request()->validate([
             'firstname' => 'required',
             'lastname' => 'required',
@@ -64,7 +63,7 @@ class ContactController extends Controller
             'birth' => 'required|date',
         ]);
 
-        auth()->user()->contacts()->update($data);
+        $contact->update($data);
 
         return redirect('/contacts/' . $contact->id)
             ->with('success', 'Contact has been Updated');
