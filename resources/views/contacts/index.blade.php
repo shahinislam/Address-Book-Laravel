@@ -23,7 +23,7 @@
             <a class="btn btn-success font-weight-bold" href="/contacts/create">Add New Contact</a>
         </div>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-sm table-striped table-hover">
             <thead>
             <tr>
                 <th>Name</th>

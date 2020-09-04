@@ -26,7 +26,7 @@
                    href="/contacts/{{ $contact->id }}/phones/create">Add New Phone</a>
             </div>
 
-            <table class="table table-striped table-hover">
+            <table class="table table-sm table-striped table-hover">
                 <thead>
                 <tr>
                     <th>Phone Type</th>

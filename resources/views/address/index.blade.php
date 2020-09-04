@@ -25,7 +25,7 @@
            <a class="btn btn-success font-weight-bold" href="/contacts/{{ $contact->id }}/address/create">Add New Address</a>
        </div>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-sm table-striped table-hover">
             <thead>
             <tr>
                 <th>Address</th>
