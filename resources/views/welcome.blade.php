@@ -6,6 +6,8 @@
 
         <title>Address Book</title>
 
+        <link rel="icon" type="image/png" href="bookmark.png"/>
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
