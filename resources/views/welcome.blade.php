@@ -121,7 +121,7 @@
                 @if (Route::has('login'))
                     <div class="">
                         @auth
-                            <a class="btn btn-warning" href="{{ url('/') }}">Home</a>
+                            <a class="btn btn-warning" href="{{ url('/contacts') }}">Home</a>
                         @else
                             <a class="btn-log btn btn-lg btn-success px-4 mr-2" href="{{ route('login') }}">Login</a>
 

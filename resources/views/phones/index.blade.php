@@ -26,6 +26,7 @@
                    href="/contacts/{{ $contact->id }}/phones/create">Add New Phone</a>
             </div>
 
+            <div class="table-responsive text-nowrap">
             <table class="table table-sm table-striped table-hover">
                 <thead>
                 <tr>
@@ -55,6 +56,9 @@
                 @endforelse
                 </tbody>
             </table>
+            </div>
+
+            
             <div class="card-footer">
                 <a class="btn btn-dark" href="/contacts">Back to Contact Lists</a>
             </div>

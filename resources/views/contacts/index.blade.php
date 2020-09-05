@@ -23,43 +23,45 @@
             <a class="btn btn-success font-weight-bold" href="/contacts/create">Add New Contact</a>
         </div>
 
-        <table class="table table-sm table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date of Birth</th>
-                <th>Option</th>
-                <th>Address</th>
-                <th>Phone</th>
-            </tr>
-            </thead>
-            <tbody>
-                @forelse($contacts as $contact)
-                    <tr>
-                        <td>
-                            <a href="/contacts/{{ $contact->id }}/details"
-                               class="text-uppercase font-weight-bold" style="color: darkturquoise;">
-                                {{ $contact->firstname }} {{ $contact->lastname }}</a>
-                        </td>
-                        <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->birth }}</td>
-                        <td>
-                            <div class="d-flex justify-content-start">
-                                <a class="btn btn-warning btn-sm px-3 mr-1" href="/contacts/{{ $contact->id }}/edit">Edit</a>
-                                <button type="button" class="btn btn-danger btn-sm delete-contact" data-toggle="modal" data-target="#deleteModal"
-                                    data-id="{{ $contact->id }}" data-url="/contacts/{{ $contact->id }}">Delete</button>
-                            
-                            </div>
-                        </td>
-                        <td><a href="/contacts/{{ $contact->id }}/address">Address List</a></td>
-                        <td><a href="/contacts/{{ $contact->id }}/phones">Phone List</a></td>
-                    </tr>
-                @empty
-                    <tr><td colspan="7">No contacts to show.</td></tr>
-                @endforelse
-            </tbody>
-        </table>
+        <div class="table-responsive text-nowrap">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Option</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @forelse($contacts as $contact)
+                        <tr>
+                            <td>
+                                <a href="/contacts/{{ $contact->id }}/details"
+                                class="text-uppercase font-weight-bold" style="color: darkturquoise;">
+                                    {{ $contact->firstname }} {{ $contact->lastname }}</a>
+                            </td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->birth }}</td>
+                            <td>
+                                <div class="d-flex justify-content-start">
+                                    <a class="btn btn-warning btn-sm px-3 mr-1" href="/contacts/{{ $contact->id }}/edit">Edit</a>
+                                    <button type="button" class="btn btn-danger btn-sm delete-contact" data-toggle="modal" data-target="#deleteModal"
+                                        data-id="{{ $contact->id }}" data-url="/contacts/{{ $contact->id }}">Delete</button>
+                                
+                                </div>
+                            </td>
+                            <td><a href="/contacts/{{ $contact->id }}/address">Address List</a></td>
+                            <td><a href="/contacts/{{ $contact->id }}/phones">Phone List</a></td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="7">No contacts to show.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
         <div class="d-flex justify-content-center">
             {{ $contacts->links() }}
         </div>

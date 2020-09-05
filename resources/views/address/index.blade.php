@@ -24,8 +24,8 @@
            <h3 class="text-uppercase text-success" style="font-family: cursive;">{{ $contact->firstname }} {{ $contact->lastname }}</h3>
            <a class="btn btn-success font-weight-bold" href="/contacts/{{ $contact->id }}/address/create">Add New Address</a>
        </div>
-
-        <table class="table table-sm table-striped table-hover">
+       <div class="table-responsive text-nowrap">
+       <table class="table table-sm table-striped table-hover">
             <thead>
             <tr>
                 <th>Address</th>
@@ -62,6 +62,8 @@
             @endforelse
             </tbody>
         </table>
+       </div>
+        
         <div class="card-footer">
             <a class="btn btn-dark mb-2" href="/contacts">Back to Contact List</a>
         </div>
