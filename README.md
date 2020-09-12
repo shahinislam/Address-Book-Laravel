@@ -111,7 +111,6 @@ Route::get('/', function () {
 
     public function update(Contact $contact)
     {
-
         $data = request()->validate([
             'firstname' => 'required',
             'lastname' => 'required',
@@ -119,7 +118,7 @@ Route::get('/', function () {
             'birth' => 'required|date',
         ]);
 
-        auth()->user()->contacts()->update($data);
+        $contact->update($data);
 
         return redirect('/contacts/' . $contact->id)
             ->with('success', 'Contact has been Updated');
@@ -129,6 +128,7 @@ Route::get('/', function () {
     {
         $name = $contact->firstname .' '. $contact->lastname;
         $contact->address()->delete();
+        $contact->phones()->delete();
         $contact->delete();
 
         return redirect()->back()->with('danger', $name . ' Contact has been Deleted');
@@ -138,6 +138,7 @@ Route::get('/', function () {
 ![4  Contact List](https://user-images.githubusercontent.com/33843231/78135787-4015f380-7444-11ea-899d-f4f2740146d9.png)
 ### index.blade.php
 ```php
+
 @extends('layouts.app')
 
 @section('title', 'Address Book | Contact Page')
@@ -163,68 +164,86 @@ Route::get('/', function () {
             <a class="btn btn-success font-weight-bold" href="/contacts/create">Add New Contact</a>
         </div>
 
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date of Birth</th>
-                <th>Option</th>
-                <th>Address</th>
-                <th>Phone</th>
-            </tr>
-            </thead>
-            <tbody>
-                @forelse($contacts as $contact)
-                    <tr>
-                        <td>
-                            <a href="/contacts/{{ $contact->id }}/details"
-                               class="text-decoration-none text-uppercase" style="color: darkslategrey;">
-                                {{ $contact->firstname }} {{ $contact->lastname }}</a>
-                        </td>
-                        <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->birth }}</td>
-                        <td>
-                            <div class="d-flex justify-content-start">
-                                <a class="btn btn-warning btn-sm px-3 mr-1" href="/contacts/{{ $contact->id }}/edit">Edit</a>
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                                <div class="modal fade" id="deleteModal">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title text-center">Delete Confirmation</h4>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p class="text-center">Are you sure you want to delete?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-info px-4" data-dismiss="modal">No</button>
-                                                <form action="/contacts/{{ $contact->id }}" method="post">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger px-4">Yes</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+        <div class="table-responsive text-nowrap">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Option</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @forelse($contacts as $contact)
+                        <tr>
+                            <td>
+                                <a href="/contacts/{{ $contact->id }}/details"
+                                class="text-uppercase font-weight-bold" style="color: darkturquoise;">
+                                    {{ $contact->firstname }} {{ $contact->lastname }}</a>
+                            </td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->birth }}</td>
+                            <td>
+                                <div class="d-flex justify-content-start">
+                                    <a class="btn btn-warning btn-sm px-3 mr-1" href="/contacts/{{ $contact->id }}/edit">Edit</a>
+                                    <button type="button" class="btn btn-danger btn-sm delete-contact" data-toggle="modal" data-target="#deleteModal"
+                                        data-id="{{ $contact->id }}" data-url="/contacts/{{ $contact->id }}">Delete</button>
+                                
                                 </div>
-                            </div>
-                        </td>
-                        <td><a href="/contacts/{{ $contact->id }}/address">Address List</a></td>
-                        <td><a href="/contacts/{{ $contact->id }}/phones">Phone List</a></td>
-                    </tr>
-                @empty
-                    <tr><td colspan="7">No contacts to show.</td></tr>
-                @endforelse
-            </tbody>
-        </table>
+                            </td>
+                            <td><a href="/contacts/{{ $contact->id }}/address">Address List</a></td>
+                            <td><a href="/contacts/{{ $contact->id }}/phones">Phone List</a></td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="7">No contacts to show.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
         <div class="d-flex justify-content-center">
             {{ $contacts->links() }}
         </div>
     </div>
 
+    <div class="modal fade" id="deleteModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">Delete Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Are you sure you want to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info px-4" data-dismiss="modal">No</button>
+                    <form action="" method="post" id="deleteForm">
+                        @method('DELETE')
+                        @csrf
+                        
+                        <button type="submit" class="btn btn-danger px-4">Yes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.delete-contact').click(function () {
+                var id = $(this).attr('data-id');
+                var url = $(this).attr('data-url');
+                console.log(url);
+                $("#deleteForm").attr("action", url);
+            });
+        });
+   </script>
+
 @endsection
+
 
 
 ```
