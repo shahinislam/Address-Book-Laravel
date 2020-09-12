@@ -73,6 +73,7 @@ class ContactController extends Controller
     {
         $name = $contact->firstname .' '. $contact->lastname;
         $contact->address()->delete();
+        $contact->phones()->delete();
         $contact->delete();
 
         return redirect()->back()->with('danger', $name . ' Contact has been Deleted');
